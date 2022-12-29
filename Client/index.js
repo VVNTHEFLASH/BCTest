@@ -5,7 +5,7 @@ import App from './src/App';
 import Dashboard from './src/Dashboard/Dashboard';
 import './index.css'
 import Pagination from './src/Pagination/Pagination';
-import Chart from './src/Analytics/Chart/Chart';
+import ChartAnalytics from './src/Analytics/Chart/Chart';
 const router = createHashRouter([
     {
       path: "/",
@@ -21,7 +21,7 @@ const router = createHashRouter([
     },
     {
       path: 'analytics/charts',
-      element: <Chart/>
+      element: <ChartAnalytics/>
     },
 ]);
 
