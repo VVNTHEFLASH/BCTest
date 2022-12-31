@@ -7,9 +7,15 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  PointElement,
+  LineElement,
+  RadialLinearScale
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Doughnut,Scatter, Pie, PolarArea, Line } from 'react-chartjs-2';
 import faker from 'faker';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(
   CategoryScale,
@@ -17,7 +23,11 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement,
+  PointElement,
+  LineElement,
+  RadialLinearScale
 );
 
 export const options = {
@@ -28,29 +38,70 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: `Chart.js Bar Chart`,
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
+const labels = ['likelihood', 'intensity', 'relevance', 'impact'];
+const backgroundColor1 =  labels.map(() => faker.commerce.color());
+const backgroundColor2 =  labels.map(() => faker.commerce.color());
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      label: labels,
+      data: labels.map(() => faker.datatype.number({ min: 100, max: 500})),
+      backgroundColor: backgroundColor1.sort((a,b) => a - b),
     },
   ],
-};
+}
 
 export default function ChartAnalytics() {
-  return <Bar options={options} data={data} width={300} height={100} />;
+  // Navigation
+  const navigate = useNavigate()
+  return(
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap'
+    }}>
+      <Button onClick={()=> navigate(-1)}>Go Back</Button>
+      <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <PolarArea options={options} data={data}/>
+      </div>
+      <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <Bar options={options} data={data} width={300} height={100} />
+      </div>
+          <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <Doughnut options={options} data={data} />
+      </div>
+      <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <Line options={options} data={data}/>
+      </div>
+      <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <Scatter options={options} data={data}/>
+      </div>
+      <div style={{
+        width: 400,
+        height: 400      
+      }}>
+      <Pie options={options} data={data}/>
+      </div>
+    </div> 
+    );
 }

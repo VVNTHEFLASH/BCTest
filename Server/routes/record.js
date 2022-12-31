@@ -22,6 +22,27 @@ recordRoutes.route("/limitrecord").get(async function (req, res) {
   })
 })
 
+// Get Filter Record that have no country
+recordRoutes.route("/countryrecord").get(async function (req, res) {
+  const query = [
+    {
+      '$match': {
+        'country': {
+          '$not': {
+            '$eq': ''
+          }
+        }
+      }
+    }
+  ];
+  let db_connect = dbo.getDb();
+  db_connect.collection("Test")
+  .aggregate(query)
+  .toArray((err, result) =>{
+    if(err) throw err;
+    res.json(result)
+  })
+})
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
  let db_connect = dbo.getDb();
