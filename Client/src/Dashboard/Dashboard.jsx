@@ -1,6 +1,6 @@
 import FlatList from 'flatlist-react'
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BASEURL } from '../../secret'
 import { 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography,
@@ -37,6 +37,15 @@ const uniqueCountry = Array.from(new Set(country));
 // filtering end year
 const end_year = Data.map((item) => item.end_year ).sort((a, b) =>  new Date().setFullYear(a) - new Date().setFullYear(b) )
 const uniqueEndYear = Array.from(new Set(end_year))
+// filtering source
+const source = Data.map((item) => item.source )
+const uniqueSource = Array.from(new Set(source));
+// filtering topic
+const topic = Data.map((item) => item.topic )
+const uniqueTopic = Array.from(new Set(topic));
+// filtering region
+const region = Data.map((item) => item.region )
+const uniqueRegion = Array.from(new Set(region));
 
 function renderItem(item, idx) {
   return(
@@ -70,7 +79,10 @@ const handleChangeSector = (event) => {
   })
   setFilterData(TempData)
   setSelectedEndYear('')
+  SetSelectedSource('')
   SetSelectedCountry('')
+  setSelectedTopic('')
+  setSelectedRegion('')
 };
 
 const handleChangeCountry = (event) => {
@@ -83,7 +95,10 @@ const handleChangeCountry = (event) => {
   })
   setFilterData(tempData)
   setSelectedEndYear('')
+  SetSelectedSource('')
   SetSelectedSector('')
+  setSelectedTopic('')
+  setSelectedRegion('')
 }
 
 const handleChangeEndYear = (event) => {
@@ -97,11 +112,65 @@ const handleChangeEndYear = (event) => {
   setFilterData(tempData)
   SetSelectedCountry('')
   SetSelectedSector('')
+  SetSelectedSource('')
+  setSelectedTopic('')
+  setSelectedRegion('')
+}
+
+const handleChangeSource = (event) => {
+  SetSelectedSource(event.target.value);
+  const tempData = [];
+  Data.slice(0).filter((item) => {
+    if(item.source === event.target.value){
+      tempData.push(item)
+    }
+  })
+  setFilterData(tempData)
+  SetSelectedCountry('')
+  setSelectedEndYear('')
+  SetSelectedSector('')
+  setSelectedTopic('')
+  setSelectedRegion('')
+}
+
+const handleChangeTopic = (event) => {
+  setSelectedRegion(event.target.value);
+  const tempData = [];
+  Data.slice(0).filter((item) => {
+    if(item.source === event.target.value){
+      tempData.push(item)
+    }
+  })
+  setFilterData(tempData)
+  SetSelectedCountry('')
+  setSelectedEndYear('')
+  SetSelectedSector('')
+  SetSelectedSource('')
+  setSelectedRegion('')
+}
+
+const handleChangeRegion = (event) => {
+  setSelectedRegion(event.target.value);
+  const tempData = [];
+  Data.slice(0).filter((item) => {
+    if(item.source === event.target.value){
+      tempData.push(item)
+    }
+  })
+  setFilterData(tempData)
+  SetSelectedCountry('')
+  setSelectedEndYear('')
+  SetSelectedSector('')
+  SetSelectedSource('')
+  setSelectedTopic('')
 }
 
 const [selectedSector, SetSelectedSector] = useState('');
 const [selectedCountry, SetSelectedCountry] = useState('');
 const [selectedEndYear, setSelectedEndYear] = useState('')
+const [selectedSource, SetSelectedSource] = useState('')
+const [selectedTopic, setSelectedTopic] = useState('')
+const [selectedRegion, setSelectedRegion] = useState('')
 
 // Navigation
 const navigate = useNavigate()
@@ -117,15 +186,27 @@ const navigate = useNavigate()
      }}>
       <Box sx={{ width: 150, marginLeft: 2 }}>
         <MUISelect selectedValue={selectedCountry} menuData={uniqueCountry} 
-        label={"Country"} handleChange={handleChangeCountry} defaultLabel={"Country"}/>
+        label={"Country"} handleChange={handleChangeCountry} defaultLabel={"Country"} />
       </Box>
       <Box sx={{ width: 150, marginLeft: 2 }}>
         <MUISelect selectedValue={selectedSector} menuData={uniqueSector}
-        label={"Sector"} handleChange={handleChangeSector} defaultLabel={"Sector"}/>
+        label={"Sector"} handleChange={handleChangeSector} defaultLabel={"Sector"} />
       </Box>
       <Box sx={{ width: 150, marginLeft: 2 }}>
         <MUISelect selectedValue={selectedEndYear} menuData={uniqueEndYear}
-        label={"Year"} handleChange={handleChangeEndYear} defaultLabel={"Year"}/>
+        label={"Year"} handleChange={handleChangeEndYear} defaultLabel={"Year"} />
+      </Box>
+      <Box sx={{ width: 150, marginLeft: 2 }}>
+        <MUISelect selectedValue={selectedSource} menuData={uniqueSource}
+        label={"Source"} handleChange={handleChangeSource} defaultLabel={"Source"} />
+      </Box>
+      <Box sx={{ width: 150, marginLeft: 2 }}>
+        <MUISelect selectedValue={selectedTopic} menuData={uniqueTopic}
+        label={"Topic"} handleChange={handleChangeTopic} defaultLabel={"Topic"} />
+      </Box>
+      <Box sx={{ width: 150, marginLeft: 2 }}>
+        <MUISelect selectedValue={selectedRegion} menuData={uniqueRegion}
+        label={"Region"} handleChange={handleChangeRegion} defaultLabel={"Region"} />
       </Box>
     </div>
     <Grid>
