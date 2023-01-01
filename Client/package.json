@@ -41,6 +41,8 @@
     "@mui/styled-engine-sc": "^5.11.0",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-prettier": "^8.5.0",
     "faker": "5.5.3",

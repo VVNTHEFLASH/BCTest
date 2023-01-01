@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import MUISelect from '../../components/MUISelect';
 
-
 const Dashboard = () => {
 
   const [Data, setData] = useState([])
@@ -53,23 +52,23 @@ const getChartData = async () => {
 //   .catch(error => console.log('error', error));
 // }
 // filtering dropdown options
-const sector = Data?.map((item) => item.sector )
-const uniqueSector = Array.from(new Set(sector));
+const sector = Data?.map((item) => item.sector)
+const uniqueSector = Array.from(new Set(sector)).filter((item) => item !== "")
 // filtering country
 const country = Data?.map((item) => item.country )
-const uniqueCountry = Array.from(new Set(country));
+const uniqueCountry = Array.from(new Set(country)).filter((item) => item !== "")
 // filtering end year
 const end_year = Data?.map((item) => item.end_year ).sort((a, b) =>  new Date().setFullYear(a) - new Date().setFullYear(b) )
-const uniqueEndYear = Array.from(new Set(end_year))
+const uniqueEndYear = Array.from(new Set(end_year)).filter((item) => item !== "")
 // filtering source
 const source = Data?.map((item) => item.source )
-const uniqueSource = Array.from(new Set(source));
+const uniqueSource = Array.from(new Set(source)).filter((item) => item !== "")
 // filtering topic
 const topic = Data?.map((item) => item.topic )
-const uniqueTopic = Array.from(new Set(topic));
+const uniqueTopic = Array.from(new Set(topic)).filter((item) => item !== "")
 // filtering region
 const region = Data?.map((item) => item.region )
-const uniqueRegion = Array.from(new Set(region));
+const uniqueRegion = Array.from(new Set(region)).filter((item) => item !== "")
 
 function renderItem(item, idx) {
   return(
@@ -158,10 +157,10 @@ const handleChangeSource = (event) => {
 }
 
 const handleChangeTopic = (event) => {
-  setSelectedRegion(event.target.value);
+  setSelectedTopic(event.target.value);
   const tempData = [];
   Data.slice(0).filter((item) => {
-    if(item.source === event.target.value){
+    if(item.topic === event.target.value){
       tempData.push(item)
     }
   })
@@ -177,7 +176,7 @@ const handleChangeRegion = (event) => {
   setSelectedRegion(event.target.value);
   const tempData = [];
   Data.slice(0).filter((item) => {
-    if(item.source === event.target.value){
+    if(item.region === event.target.value){
       tempData.push(item)
     }
   })
@@ -201,7 +200,7 @@ const navigate = useNavigate()
 
   return (
     <>
-    <Button onClick={() => navigate(-1)}>Go Back</Button>
+    {/* <Button onClick={() => navigate(-1)}>Go Back</Button> */}
     <Grid>
       <Typography variant={'h6'}>Filters</Typography>
     </Grid>

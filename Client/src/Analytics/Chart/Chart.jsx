@@ -61,11 +61,12 @@ export default function ChartAnalytics() {
   // Navigation
   const navigate = useNavigate()
   return(
+    <>
+    <Button onClick={()=> navigate(-1)}>Go Back</Button>
     <div style={{
       display: 'flex',
       flexWrap: 'wrap'
     }}>
-      <Button onClick={()=> navigate(-1)}>Go Back</Button>
       <div style={{
         width: 400,
         height: 400      
@@ -103,5 +104,6 @@ export default function ChartAnalytics() {
       <Pie options={options} data={data}/>
       </div>
     </div> 
+    </>
     );
 }
