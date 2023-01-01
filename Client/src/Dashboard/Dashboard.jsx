@@ -1,7 +1,7 @@
 import FlatList from 'flatlist-react'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BASEURL } from '../../secret'
+import { API_KEY, BASEURL, COLLECTION, DATABASE, DATA_SOURCE } from '../../secret'
 import { 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, Typography,
   Box, Button
@@ -28,23 +28,47 @@ const getChartData = async () => {
     console.log(result, 'getChartData')
   })
 }
+
+// const getChartData = () => {
+//   var myHeaders = new Headers();
+// myHeaders.append("api-key", "g2JbR7rJoulw2l5kDJsVSKwNbLf7X27qSjl5zAPl0timCuo0ta8p8pTqLQ7U2ho6");
+// myHeaders.append("Content-Type", "application/json");
+
+// var raw = JSON.stringify({
+//   "dataSource": "FriendNationCluster",
+//   "database": "BlackCoffer",
+//   "collection": "Test"
+// });
+
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: 'follow'
+// };
+
+// fetch("https://data.mongodb-api.com/app/data-kecdz/endpoint/data/v1/action/find", requestOptions)
+//   .then(response => response.text())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+// }
 // filtering dropdown options
-const sector = Data.map((item) => item.sector )
+const sector = Data?.map((item) => item.sector )
 const uniqueSector = Array.from(new Set(sector));
 // filtering country
-const country = Data.map((item) => item.country )
+const country = Data?.map((item) => item.country )
 const uniqueCountry = Array.from(new Set(country));
 // filtering end year
-const end_year = Data.map((item) => item.end_year ).sort((a, b) =>  new Date().setFullYear(a) - new Date().setFullYear(b) )
+const end_year = Data?.map((item) => item.end_year ).sort((a, b) =>  new Date().setFullYear(a) - new Date().setFullYear(b) )
 const uniqueEndYear = Array.from(new Set(end_year))
 // filtering source
-const source = Data.map((item) => item.source )
+const source = Data?.map((item) => item.source )
 const uniqueSource = Array.from(new Set(source));
 // filtering topic
-const topic = Data.map((item) => item.topic )
+const topic = Data?.map((item) => item.topic )
 const uniqueTopic = Array.from(new Set(topic));
 // filtering region
-const region = Data.map((item) => item.region )
+const region = Data?.map((item) => item.region )
 const uniqueRegion = Array.from(new Set(region));
 
 function renderItem(item, idx) {

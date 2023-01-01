@@ -2,6 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "description": "",
+  "homepage": ".",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server .",
@@ -44,6 +45,7 @@
     "eslint-config-prettier": "^8.5.0",
     "faker": "5.5.3",
     "flatlist-react": "^1.5.7",
+    "netlify-cli": "^12.5.0",
     "prettier": "^2.8.1",
     "react-chartjs-2": "^5.1.0",
     "react-router-dom": "^6.6.1",
